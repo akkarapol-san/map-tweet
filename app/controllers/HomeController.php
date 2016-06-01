@@ -14,10 +14,25 @@ class HomeController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-
-	public function showWelcome()
+	public function index()
 	{
-		return View::make('hello');
+		return View::make('index');
+	}
+
+	public function search()
+	{
+		$input = Input::all();
+		$input['q'] = trim($input['q']); 
+		$cache = Cache::get(strtolower($input['q']));
+		if(!empty($cache)){
+			$result = $cache;
+		} else {
+			$map_tweet = new MapTweet();
+			$result    = $map_tweet->search($input['q'], $input['lat'], $input['lon']);
+			Cache::add(strtolower($input['q']), $result, Config::get('constants.CACHE_EXPIRE'));
+		}
+		
+		return $result;
 	}
 
 }
