@@ -36,7 +36,7 @@
 					console.log($('#lat').val(), ',',$('#lon').val());
 					$.ajax({
 					  type: "POST",
-					  url: "<?php echo URL::to('home/search');?>",
+					  url: "<?php echo URL::to('/');?>",
 					  data: { q: $('#q').val(), lat: $('#lat').val(), lon:$('#lon').val() },
 					  success: function( data ) {
 						  initialize($('#lat').val(), $('#lon').val());

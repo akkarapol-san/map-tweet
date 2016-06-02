@@ -10,5 +10,5 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::any('home/search', 'HomeController@search');
+Route::any('/', 'HomeController@index');
+Route::any('/home/search', 'HomeController@search');
